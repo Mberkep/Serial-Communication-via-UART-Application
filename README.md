@@ -1,1 +1,1 @@
-# Serial-Communication-via-UART-Application
+This project demonstrates serial communication via UART using two codes. Code 1 processes input received through a serial interface by printing it, converting it to a long integer, doubling the value, and displaying the modified result on both the screen and an LCD. Code 2 sequentially prints numbers from 1 to 4 with a delay, appending a '*' at the end and pausing before repeating. This application highlights basic UART-based data handling, conversion, and display techniques.
