@@ -1,0 +1,87 @@
+#include <16F877A.h>
+#include <lcd.c>
+
+// Motor Constants
+#define GEAR_RATIO 131
+#define RESOLUTION 64
+
+// PID Constants
+#define Kp 0.5
+#define Ki 0.0
+
+// Variables
+unsigned int16 reference = 0;
+unsigned int16 velocity = 0;
+unsigned int16 error = 0;
+unsigned int32 integral = 0;
+unsigned int16 prevEncoderCount = 0;
+
+// Timer0 Variables
+unsigned int8 timer0Count = 0;
+unsigned int32 integralSum = 0;
+
+// Interrupt Service Routine for Timer0
+#int_timer0
+void timer0_isr()
+{
+    // Update integral of error every 1 second
+    if (timer0Count == 1000)
+    {
+        integral = integralSum;
+        integralSum = 0;
+        timer0Count = 0;
+    }
+    else
+    {
+        timer0Count++;
+        integralSum += error;
+    }
+}
+
+// Interrupt Service Routine for Encoder
+#int_ext
+void encoder_isr()
+{
+    unsigned int16 encoderCount = (input(PIN_C1) << 1) | input(PIN_C0);
+    int16 countDifference = encoderCount - prevEncoderCount;
+    if (countDifference > (RESOLUTION / 2))
+        countDifference -= RESOLUTION;
+    else if (countDifference < (-RESOLUTION / 2))
+        countDifference += RESOLUTION;
+
+    velocity = (unsigned int16)(countDifference * 60 * 1000 * GEAR_RATIO / RESOLUTION);  // RPM
+    prevEncoderCount = encoderCount;
+
+    error = reference - velocity;
+}
+
+void main()
+{
+    // Initialization
+    setup_timer_0(RTCC_INTERNAL | RTCC_DIV_256);
+    enable_interrupts(INT_TIMER0);
+    enable_interrupts(INT_EXT);
+    enable_interrupts(GLOBAL);
+    lcd_init();
+
+    while (TRUE)
+    {
+        // Read reference velocity from potentiometer (adjust as per your circuit)
+        reference = read_adc();  // Assuming potentiometer is connected to AN0 pin
+
+        // P Controller
+        int16 controlSignal = Kp * error;
+
+        // Apply control signal to motor (adjust as per your circuit)
+        // Implement your code to control the motor speed with the control signal
+
+        // Display values on LCD
+        printf(lcd_putc, "\fRef: %u RPM", reference);
+        printf(lcd_putc, "\nVel: %u RPM", velocity);
+        printf(lcd_putc, "\nErr: %u   ", error);
+        printf(lcd_putc, "\nInt: %Lu    ", integral);
+
+        delay_ms(100);
+    }
+}
+

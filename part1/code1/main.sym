@@ -1,0 +1,152 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+004-005 @MEMSET.P3
+008     PSP_DATA
+008     lcdlat
+008     lcd
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-021 strtok.save
+022-025 _Randseed
+026     counter
+027-02A strInput
+02B-02C inputString
+02D     MAIN.i
+02E-02F @PRINTF_LU_9600_62_63.P1
+02E-02F @PRINTF_LU_920.P2
+02E     @PSTRINGCN7_9600_62_63.P3
+02E     lcd_init.i
+02E     @PSTRINGCN7_920.P1
+02E-02F atol.s
+02E     MAIN.@SCRATCH1
+02E     @PSTRINGR_9600_62_63.@SCRATCH1
+02F-032 lcd_init.LCD_INIT_STRING
+02F     MAIN.@SCRATCH2
+02F     @PSTRINGCN7_9600_62_63.@SCRATCH1
+02F     @PSTRINGR_9600_62_63.@SCRATCH2
+02F     @PSTRINGCN7_920.@SCRATCH1
+030-031 atol.result
+030     @PSTRINGCN7_9600_62_63.@SCRATCH2
+030     @PRINTF_LU_9600_62_63.@SCRATCH1
+030     @PSTRINGCN7_920.@SCRATCH2
+030     @PRINTF_LU_920.@SCRATCH1
+031     @PSTRINGCN7_9600_62_63.@SCRATCH3
+031     @PRINTF_LU_9600_62_63.@SCRATCH2
+031     @PSTRINGCN7_920.@SCRATCH3
+031     @PRINTF_LU_920.@SCRATCH2
+032     atol.sign
+032     @PSTRINGCN7_9600_62_63.@SCRATCH4
+032     @PRINTF_LU_9600_62_63.@SCRATCH3
+032     @PSTRINGCN7_920.@SCRATCH4
+032     @PRINTF_LU_920.@SCRATCH3
+033     atol.base
+033     lcd_init.@SCRATCH1
+033     @PRINTF_LU_9600_62_63.@SCRATCH4
+033     @PRINTF_LU_920.@SCRATCH4
+034     atol.index
+034     @PRINTF_LU_9600_62_63.@SCRATCH5
+034     @PRINTF_LU_920.@SCRATCH5
+035     atol.c
+035     @PRINTF_LU_9600_62_63.@SCRATCH6
+035     @PRINTF_LU_920.@SCRATCH6
+036-037 @MULS1616.P1
+036     atol.@SCRATCH1
+036     @PRINTF_LU_9600_62_63.@SCRATCH7
+036     @PRINTF_LU_920.@SCRATCH7
+037     lcd_putc.c
+037     atol.@SCRATCH2
+038     lcd_gotoxy.x
+038     @delay_ms1.P1
+038-039 @MULS1616.P2
+038     atol.@SCRATCH3
+039     lcd_gotoxy.y
+03A     lcd_gotoxy.address
+03A     @MULS1616.@SCRATCH1
+03B     @MULS1616.@SCRATCH2
+03B     lcd_gotoxy.@SCRATCH1
+03C     lcd_send_byte.address
+03D     lcd_send_byte.n
+03E     lcd_read_byte.low
+03E     lcd_send_byte.@SCRATCH1
+03F     lcd_read_byte.high
+03F     lcd_send_nibble.n
+040     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+077     @MEMSET.P1
+078     @SCRATCH
+078     _RETURN_
+078     @MEMSET.P1
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const942.call
+00000D  @const946.call
+000014  @const949.call
+00001A  @delay_ms1
+00002F  lcd_send_nibble
+00003B  lcd_read_nibble
+000041  lcd_send_byte
+000047  lcd_read_byte
+000081  lcd_init
+0000BF  @PSTRINGCN7_9600_62_63
+000118  @PSTRINGR_9600_62_63
+000131  atol
+0001A4  @MULS1616
+000267  @PRINTF_LU_9600_62_63
+0002C2  lcd_gotoxy
+0002D4  lcd_putc
+000300  @PSTRINGCN7_920
+000359  @PRINTF_LU_920
+0003BE  @MEMSET
+0003C9  @cinit1
+0003C9  MAIN
+0003DC  @cinit2
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    C:\Users\Berke\Desktop\mehmetberke_parlat_lab4\code1\
+
+Project Files:
+    main.c                                                  [31-May-23 22:02  CRC=02B5628F]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [12-Kas-13 14:35  CRC=81334808]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [08-Haz-11 14:39  CRC=0B6669CF]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [16-Tem-10 09:27  CRC=897CEC6C]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [14-Tem-11 10:13  CRC=23EDEC8F]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-Oca-08 13:55  CRC=2D1F019F]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c   [19-Eyl-13 15:38  CRC=D1A6378A]
+
+Source signature=0D255E14
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA
